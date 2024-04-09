@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrossWalk Searcher</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <header>
+    <h1>CrossWalk Searcher</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Autocoder</a></li>
+        <li><a href="crosswalk.html">Crosswalk</a></li>
+        <li><a href="batched_autocoding.html">Batched Autocoding</a></li>
+        <li><a href="information.html">Information</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <p>Search for occupations using the Crosswalk Searcher. The AutoCoder helps you find occupations that match your skills and interests. This autocoder will return as a 2010 Census code.</p>
+
+    <form action="/" method="post">
+      <label for="job-title">Job Title:</label>
+      <input type="text" id="job-title" name="job_title">
+
+      <label for="education-level">Education Level:</label>
+      <select id="education-level" name="education_level">
+        <option value="">Select</option>
+        <option value="high_school">High School Diploma</option>
+        <option value="associates_degree">Associate's Degree</option>
+        <option value="bachelors_degree">Bachelor's Degree</option>
+        <option value="graduate_degree">Graduate Degree</option>
+      </select>
+
+      <label for="industry">Industry:</label>
+      <input type="text" id="industry" name="industry">
+
+      <label for="autocoder-type">Autocoder Type:</label>
+      <select id="autocoder-type" name="autocoder_type">
+        <option value="">Select</option>
+        <option value="llm">LLM Autocoder</option>
+        <option value="t5">T5 Autocoder</option>
+      </select>
+
+      <button type="submit">Search</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; Autocoder CrossWalking</p>
+  </footer>
+</body>
+</html>

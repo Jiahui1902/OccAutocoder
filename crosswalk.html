@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrossWalk Searcher</title>
+  <link rel="stylesheet" href="crosswalk.css">
+</head>
+<body>
+  <header>
+    <h1>CrossWalk Searcher</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Autocoder</a></li>
+        <li><a href="crosswalk.html" class="active">Crosswalk</a></li>
+        <li><a href="batched_autocoding.html">Batched Autocoding</a></li>
+        <li><a href="information.html">Information</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    e the Crosswalk Searcher to compare outputs from different autocoders. Select two coding systems to crosswalk and provide the job title, education level, and industry. This allows you to analyze how different autocoders categorize occupations, providing insights into their strengths and weaknesses.</p>
+    <form id="crosswalkForm" action="/" method="post">
+      <label for="job-title">Job Title:</label>
+      <input type="text" id="job-title" name="job_title">
+
+      <label for="education-level">Education Level:</label>
+      <select id="education-level" name="education_level">
+        <option value="">Select</option>
+        <option value="high_school">High School Diploma</option>
+        <option value="associates_degree">Associate's Degree</option>
+        <option value="bachelors_degree">Bachelor's Degree</option>
+        <option value="graduate_degree">Graduate Degree</option>
+      </select>
+
+      <label for="industry">Industry:</label>
+      <input type="text" id="industry" name="industry">
+
+      <label>Select two coding systems to crosswalk:</label><br>
+      <label><input type="checkbox" name="codingSystem" value="SOC2010"> SOC 2010</label><br>
+      <label><input type="checkbox" name="codingSystem" value="SOC2018"> SOC 2018</label><br>
+      <label><input type="checkbox" name="codingSystem" value="CENSUS2018"> CENSUS 2018</label><br>
+      <label><input type="checkbox" name="codingSystem" value="ONET"> O*NET</label><br>
+
+      <button type="submit">Search</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; Autocoder CrossWalking</p>
+  </footer>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        let checkedCount = 0;
+        checkboxes.forEach(cb => {
+          if (cb.checked) checkedCount++;
+        });
+        if (checkedCount > 2) {
+          checkbox.checked = false;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
