@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CrossWalk Searcher</title>
-  <link rel="stylesheet" href="crosswalk.css">
+  <!-- <link rel="stylesheet" href="crosswalk.css"> -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/crosswalk.css') }}">
+
 </head>
 <body>
   <header>
@@ -49,7 +51,7 @@
       
       <div id="interactiveOutput"></div>
 
-      <script src="crosswalk.js"></script>
+      <!-- <script src="crosswalk.js"></script> -->
 
       
       
@@ -62,7 +64,7 @@
       <!-- <br> -->
       <!-- <label for="Output">Output:</label> -->
       <!-- <label id="interactiveOutput"></label> -->
-      <!-- <script src="{{ url_for('static', filename='crosswalk.js') }}"></script> -->
+      <script src="{{ url_for('static', filename='crosswalk.js') }}"></script>
       <!-- SOC to Census -->
 
 
