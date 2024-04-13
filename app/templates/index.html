@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CrossWalk Searcher</title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
   <header>
-    <h1>CrossWalk Searcher</h1>
+    <h1>AutoCoder</h1>
     <nav>
-      <ul>
-        <li><a href="index.html" class="active">Autocoder</a></li>
-        <li><a href="crosswalk.html">Crosswalk</a></li>
-        <li><a href="batched_autocoding.html">Batched Autocoding</a></li>
-        <li><a href="information.html">Information</a></li>
+      <ul>        
+        <li class="{{ 'active' if request.endpoint == 'index_page' else '' }}"><a href="{{ url_for('index_page') }}">Autocoder</a></li>
+        <li class="{{ 'active' if request.endpoint == 'crosswalk_page' else '' }}"><a href="{{ url_for('crosswalk_page') }}">Crosswalk</a></li>
+        <li class="{{ 'active' if request.endpoint == 'batched_autocoding_page' else '' }}"><a href="{{ url_for('batched_autocoding_page') }}">Batched Autocoding</a></li>
+        <li class="{{ 'active' if request.endpoint == 'information_page' else '' }}"><a href="{{ url_for('information_page') }}">Information</a></li>
       </ul>
     </nav>
   </header>

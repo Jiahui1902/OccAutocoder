@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrossWalk</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/crosswalk.css') }}">
+
+</head>
+<body>
+  <header>
+    <h1>Crosswalk</h1>
+    <nav>
+      <ul>        
+        <li class="{{ 'active' if request.endpoint == 'index_page' else '' }}"><a href="{{ url_for('index_page') }}">Autocoder</a></li>
+        <li class="{{ 'active' if request.endpoint == 'crosswalk_page' else '' }}"><a href="{{ url_for('crosswalk_page') }}">Crosswalk</a></li>
+        <li class="{{ 'active' if request.endpoint == 'batched_autocoding_page' else '' }}"><a href="{{ url_for('batched_autocoding_page') }}">Batched Autocoding</a></li>
+        <li class="{{ 'active' if request.endpoint == 'information_page' else '' }}"><a href="{{ url_for('information_page') }}">Information</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    The Crosswalk Searcher is to compare outputs from different autocoders. Select two coding systems to crosswalk and provide the job title, education level, and industry. This allows you to analyze how different autocoders categorize occupations, providing insights into their strengths and weaknesses.</p>
+    
+      <h2 for="keyInput">Bashed Input:</h2>  
+      <form id="crosswalkForm">
+        <input type="file" name="crosswalkcsv_file" required>
+        <br>
+        <label id="crosswalkdata" style="color:green;"></label>
+        <br>
+        <button type="button" onclick="downloadCrosswalk()">Upload and Download Crosswalked Results</button>
+      </form>
+      
+      <br>
+
+
+  <!-- ===================================== -->
+  <!--        Interactive Crosswalk          -->
+  <!-- ===================================== -->
+      <h2 for="keyInput">Interactive Input:</h2>
+      <form id="crosswalkForm" action="{{ url_for('get_options') }}" method="post">
+      <label><input type="checkbox" name="codingSystem" value="onet2soc"> O*NET to SOC2018</label>
+      <label><input type="checkbox" name="codingSystem" value="soc2cen"> SOC2018 to Census2018</label>
+      
+      <input type="text" name="codingInput" id="interactivekeyInput">
+
+      <button type="submit">Crosswalk</button>
+      </form>
+      
+      <div id="interactiveOutput"></div>
+      
+      <script src="{{ url_for('static', filename='crosswalk.js') }}"></script>
+      
+      <script type='text/javascript'>
+           var urls = {
+              parseCrosswalk: "{{ url_for('parse_crosswalk') }}"
+            };
+            
+            function downloadCrosswalk() {
+
+            fetch(urls.parseCrosswalk, {
+                method: 'POST',
+                body: new FormData(document.getElementById('crosswalkForm'))
+            })
+            .then(response => response.json())
+            .then(response => {    
+                if (response.data && Array.isArray(response.data)) {
+                document.getElementById("crosswalkdata").innerHTML = response.message;
+                // Convert JSON to CSV
+                const csv = jsonToCSV(response.data);
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'crosswaled_data.csv';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else {
+                    console.error('No data to download or data is empty');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+      </script>
+
+
+  </main>
+
+  <footer>
+    <p>&copy; Autocoder CrossWalking</p>
+  </footer>
+
+ 
+</body>
+</html>

@@ -4,23 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CrossWalk Searcher</title>
-  <link rel="stylesheet" href="information.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/information.css') }}">
 </head>
 <body>
   <header>
-    <h1>CrossWalk Searcher</h1>
+    <h1>Information</h1>
     <nav>
-      <ul>
-        <li><a href="index.html">Autocoder</a></li>
-        <li><a href="crosswalk.html">Crosswalk</a></li>
-        <li><a href="batched_autocoding.html">Batched Autocoding</a></li>
-        <li><a href="information.html" class="active">Information</a></li>
-      </ul>
+      <!-- <ul>        
+        <li><a href="{{ url_for('index_page') }}">Autocoder</a></li>
+        <li><a href="{{ url_for('crosswalk_page') }}">Crosswalk</a></li>
+        <li><a href="{{ url_for('batched_autocoding_page') }}">Batched Autocoding</a></li>
+        <li><a href="{{ url_for('information_page') }}" class="active">Information</a></li>
+      </ul> -->
+
+    <ul>        
+    <li class="{{ 'active' if request.endpoint == 'index_page' else '' }}"><a href="{{ url_for('index_page') }}">Autocoder</a></li>
+    <li class="{{ 'active' if request.endpoint == 'crosswalk_page' else '' }}"><a href="{{ url_for('crosswalk_page') }}">Crosswalk</a></li>
+    <li class="{{ 'active' if request.endpoint == 'batched_autocoding_page' else '' }}"><a href="{{ url_for('batched_autocoding_page') }}">Batched Autocoding</a></li>
+    <li class="{{ 'active' if request.endpoint == 'information_page' else '' }}"><a href="{{ url_for('information_page') }}">Information</a></li>
+    </ul>
+
     </nav>
   </header>
 
   <main>
     <p>This Occupation is a fundamental concept in sociology but classifying job descriptions into occupational categories can be challenging and susceptible to errors. Traditionally, this involved expert manual coding, translating detailed, often ambiguous job descriptions to standardized categories, a process both laborious and costly. However, recent advances in computational techniques offer efficient automated coding alternatives. Deriving from machine learning and artificial intelligence, these techniques ensure faster data processing, greater consistency, reduced human error, and cost-efficiency. This paper details U.S. occupational data collection and classification, reviews prevalent autocoding techniques like those adopted by the Census Bureau, O*NET, Centers for Disease Control and Prevention, and the National Cancer Institute, and introduces a series of new models that offer improved accuracy. We adapt several probabilistic and neural network language models for coding occupational write-in data. The discussion encompasses each method’s strengths, limitations, and context-specific efficacy.</p>
+  
+    
+    <p><a href="{{ url_for('static', filename='paper/PAA_2024_occupation_coding_manuscript.pdf') }}">Paper</a></p>  
+
   </main>
 
   <footer>
